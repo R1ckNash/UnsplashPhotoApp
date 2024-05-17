@@ -9,13 +9,18 @@
 /* Begin PBXBuildFile section */
 		9BA4D6CF2BF7E00E009BB92D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6CE2BF7E00E009BB92D /* AppDelegate.swift */; };
 		9BA4D6D12BF7E00E009BB92D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D02BF7E00E009BB92D /* SceneDelegate.swift */; };
-		9BA4D6D32BF7E00E009BB92D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D22BF7E00E009BB92D /* ViewController.swift */; };
-		9BA4D6D62BF7E00E009BB92D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D52BF7E00E009BB92D /* Base */; };
 		9BA4D6D82BF7E00F009BB92D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D72BF7E00F009BB92D /* Assets.xcassets */; };
 		9BA4D6DB2BF7E00F009BB92D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9BA4D6DA2BF7E00F009BB92D /* Base */; };
 		9BA4D6E62BF7E00F009BB92D /* UnsplashPhotoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6E52BF7E00F009BB92D /* UnsplashPhotoAppTests.swift */; };
 		9BA4D6F02BF7E00F009BB92D /* UnsplashPhotoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6EF2BF7E00F009BB92D /* UnsplashPhotoAppUITests.swift */; };
 		9BA4D6F22BF7E00F009BB92D /* UnsplashPhotoAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6F12BF7E00F009BB92D /* UnsplashPhotoAppUITestsLaunchTests.swift */; };
+		9BA4D7072BF7E5A2009BB92D /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7062BF7E5A2009BB92D /* AssemblyModuleBuilder.swift */; };
+		9BA4D7092BF7E624009BB92D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7082BF7E624009BB92D /* Router.swift */; };
+		9BA4D70B2BF7E811009BB92D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D70A2BF7E811009BB92D /* MainViewController.swift */; };
+		9BA4D70D2BF7EBC1009BB92D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D70C2BF7EBC1009BB92D /* Photo.swift */; };
+		9BA4D70F2BF7FA77009BB92D /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D70E2BF7FA77009BB92D /* MainPresenter.swift */; };
+		9BA4D7112BF7FC9F009BB92D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7102BF7FC9F009BB92D /* NetworkManager.swift */; };
+		9BA4D7132BF8001A009BB92D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7122BF8001A009BB92D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +44,6 @@
 		9BA4D6CB2BF7E00E009BB92D /* UnsplashPhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA4D6CE2BF7E00E009BB92D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BA4D6D02BF7E00E009BB92D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9BA4D6D22BF7E00E009BB92D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9BA4D6D52BF7E00E009BB92D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BA4D6D72BF7E00F009BB92D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BA4D6DA2BF7E00F009BB92D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BA4D6DC2BF7E00F009BB92D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +52,13 @@
 		9BA4D6EB2BF7E00F009BB92D /* UnsplashPhotoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashPhotoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA4D6EF2BF7E00F009BB92D /* UnsplashPhotoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPhotoAppUITests.swift; sourceTree = "<group>"; };
 		9BA4D6F12BF7E00F009BB92D /* UnsplashPhotoAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPhotoAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9BA4D7062BF7E5A2009BB92D /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
+		9BA4D7082BF7E624009BB92D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		9BA4D70A2BF7E811009BB92D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9BA4D70C2BF7EBC1009BB92D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		9BA4D70E2BF7FA77009BB92D /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		9BA4D7102BF7FC9F009BB92D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9BA4D7122BF8001A009BB92D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +111,14 @@
 			children = (
 				9BA4D6CE2BF7E00E009BB92D /* AppDelegate.swift */,
 				9BA4D6D02BF7E00E009BB92D /* SceneDelegate.swift */,
-				9BA4D6D22BF7E00E009BB92D /* ViewController.swift */,
-				9BA4D6D42BF7E00E009BB92D /* Main.storyboard */,
+				9BA4D7062BF7E5A2009BB92D /* AssemblyModuleBuilder.swift */,
+				9BA4D7082BF7E624009BB92D /* Router.swift */,
+				9BA4D6FE2BF7E4C8009BB92D /* MainModule */,
+				9BA4D6FF2BF7E4D0009BB92D /* DetailModule */,
 				9BA4D6D72BF7E00F009BB92D /* Assets.xcassets */,
 				9BA4D6D92BF7E00F009BB92D /* LaunchScreen.storyboard */,
 				9BA4D6DC2BF7E00F009BB92D /* Info.plist */,
+				9BA4D7122BF8001A009BB92D /* Constants.swift */,
 			);
 			path = UnsplashPhotoApp;
 			sourceTree = "<group>";
@@ -125,6 +138,72 @@
 				9BA4D6F12BF7E00F009BB92D /* UnsplashPhotoAppUITestsLaunchTests.swift */,
 			);
 			path = UnsplashPhotoAppUITests;
+			sourceTree = "<group>";
+		};
+		9BA4D6FE2BF7E4C8009BB92D /* MainModule */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D7002BF7E528009BB92D /* Service */,
+				9BA4D7032BF7E543009BB92D /* Presenter */,
+				9BA4D7022BF7E53D009BB92D /* View */,
+				9BA4D7012BF7E535009BB92D /* Model */,
+			);
+			path = MainModule;
+			sourceTree = "<group>";
+		};
+		9BA4D6FF2BF7E4D0009BB92D /* DetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D7052BF7E566009BB92D /* View */,
+				9BA4D7042BF7E55E009BB92D /* Presenter */,
+			);
+			path = DetailModule;
+			sourceTree = "<group>";
+		};
+		9BA4D7002BF7E528009BB92D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D7102BF7FC9F009BB92D /* NetworkManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		9BA4D7012BF7E535009BB92D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D70C2BF7EBC1009BB92D /* Photo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9BA4D7022BF7E53D009BB92D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D70A2BF7E811009BB92D /* MainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9BA4D7032BF7E543009BB92D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				9BA4D70E2BF7FA77009BB92D /* MainPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9BA4D7042BF7E55E009BB92D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9BA4D7052BF7E566009BB92D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +312,6 @@
 			files = (
 				9BA4D6D82BF7E00F009BB92D /* Assets.xcassets in Resources */,
 				9BA4D6DB2BF7E00F009BB92D /* Base in Resources */,
-				9BA4D6D62BF7E00E009BB92D /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BA4D6D32BF7E00E009BB92D /* ViewController.swift in Sources */,
+				9BA4D70D2BF7EBC1009BB92D /* Photo.swift in Sources */,
+				9BA4D7092BF7E624009BB92D /* Router.swift in Sources */,
 				9BA4D6CF2BF7E00E009BB92D /* AppDelegate.swift in Sources */,
 				9BA4D6D12BF7E00E009BB92D /* SceneDelegate.swift in Sources */,
+				9BA4D7112BF7FC9F009BB92D /* NetworkManager.swift in Sources */,
+				9BA4D7072BF7E5A2009BB92D /* AssemblyModuleBuilder.swift in Sources */,
+				9BA4D70F2BF7FA77009BB92D /* MainPresenter.swift in Sources */,
+				9BA4D70B2BF7E811009BB92D /* MainViewController.swift in Sources */,
+				9BA4D7132BF8001A009BB92D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +381,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9BA4D6D42BF7E00E009BB92D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9BA4D6D52BF7E00E009BB92D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9BA4D6D92BF7E00F009BB92D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -447,7 +523,6 @@
 				INFOPLIST_FILE = UnsplashPhotoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,7 +550,6 @@
 				INFOPLIST_FILE = UnsplashPhotoApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
