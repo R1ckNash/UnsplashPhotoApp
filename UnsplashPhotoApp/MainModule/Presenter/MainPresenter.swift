@@ -29,7 +29,6 @@ class MainPresenter: MainPresenterProtocol {
         self.view = view
         self.router = router
         self.networkManager = networkManager
-        fetchPhotos()
     }
     
     func fetchPhotos() {

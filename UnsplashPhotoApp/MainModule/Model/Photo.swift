@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photo: Decodable {
+struct Photo: Decodable, Hashable {
     let color: String
     let description: String?
     let alt_description: String
@@ -15,11 +15,11 @@ struct Photo: Decodable {
     let urls: ImageUrls
     let user: User
     
-    struct ImageUrls: Decodable {
+    struct ImageUrls: Decodable, Hashable {
         let thumb: String
         let regular: String
     }
-    struct User: Decodable {
+    struct User: Decodable, Hashable {
         let username: String
     }
     

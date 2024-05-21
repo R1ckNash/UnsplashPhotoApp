@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B57C0D22BF8B8CD002BA8BB /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57C0D12BF8B8CD002BA8BB /* PhotoTableViewCell.swift */; };
 		9BA4D6CF2BF7E00E009BB92D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6CE2BF7E00E009BB92D /* AppDelegate.swift */; };
 		9BA4D6D12BF7E00E009BB92D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D02BF7E00E009BB92D /* SceneDelegate.swift */; };
 		9BA4D6D82BF7E00F009BB92D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA4D6D72BF7E00F009BB92D /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B57C0D12BF8B8CD002BA8BB /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 		9BA4D6CB2BF7E00E009BB92D /* UnsplashPhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashPhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA4D6CE2BF7E00E009BB92D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BA4D6D02BF7E00E009BB92D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA4D70A2BF7E811009BB92D /* MainViewController.swift */,
+				9B57C0D12BF8B8CD002BA8BB /* PhotoTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B57C0D22BF8B8CD002BA8BB /* PhotoTableViewCell.swift in Sources */,
 				9BA4D70D2BF7EBC1009BB92D /* Photo.swift in Sources */,
 				9BA4D7092BF7E624009BB92D /* Router.swift in Sources */,
 				9BA4D6CF2BF7E00E009BB92D /* AppDelegate.swift in Sources */,
