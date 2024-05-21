@@ -12,7 +12,7 @@ protocol RouterProtocol {
     var navigationController: UINavigationController? { get set }
     var assemblyBuilder: AssemblyModuleBuilderProtocol? { get set }
     func initialViewController()
-    func showDetail(with photo: Photo)
+    func showDetailViewController(with photo: Photo)
 }
 
 class Router: RouterProtocol {
@@ -30,8 +30,9 @@ class Router: RouterProtocol {
         navigationController.viewControllers = [mainViewController]
     }
     
-    func showDetail(with photo: Photo) {
-        print("soon")
+    func showDetailViewController(with photo: Photo) {
+        guard let navigationController = navigationController else { return }
+        guard let detailViewController = assemblyBuilder?.buildDetailModule(with: photo, router: self) else { return }
+        navigationController.pushViewController(detailViewController, animated: true)
     }
-    
 }

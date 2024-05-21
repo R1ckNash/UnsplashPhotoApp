@@ -6,18 +6,22 @@
 //
 
 import UIKit
+import Kingfisher
 
-class PhotoTableViewCell: UITableViewCell {
+final class PhotoTableViewCell: UITableViewCell {
     
     private lazy var photoView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
         return label
     }()
     
@@ -25,6 +29,7 @@ class PhotoTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
+        label.textAlignment = .left
         return label
     }()
     
@@ -38,40 +43,39 @@ class PhotoTableViewCell: UITableViewCell {
     }
     
     func configureCell(with photo: Photo) {
-        //photoView.image = photo.urls.thumb загрузка изображения из сети
-        likesLabel.text = String(photo.likes)
-        descriptionLabel.text = photo.description
-        //descriptionLabel.textColor = UIColor(hexString: photo.color)
+        let url = URL(string: photo.urls.thumb)
+        photoView.kf.setImage(with: url)
+        
+        likesLabel.text = "\(photo.likes) likes"
+        descriptionLabel.text = photo.photoDescription
+        descriptionLabel.textColor = UIColor(hexString: photo.color)
+        backgroundColor = .black
     }
     
-    func setupLayout() {
-       // contentView.addSubview(photoView)
+    private func setupLayout() {
+        contentView.addSubview(photoView)
         contentView.addSubview(likesLabel)
         contentView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-//            photoView.heightAnchor.constraint(equalToConstant: 60),
-//            photoView.widthAnchor.constraint(equalToConstant: 30),
-//            photoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-//            photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-//            photoView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -5),
+            photoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            photoView.heightAnchor.constraint(equalToConstant: 200),
             
-//            likesLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            likesLabel.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 16),
-//            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-//            
-//            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32),
-//            descriptionLabel.leadingAnchor.constraint(equalTo: likesLabel.trailingAnchor, constant: 16),
-//            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            likesLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 8),
+            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
+            descriptionLabel.topAnchor.constraint(equalTo: likesLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
-
 }
 
+//MARK: - extension UITableViewCell
 extension UITableViewCell {
     static var reuseIdentifier: String {
         return String(describing: self)
@@ -79,7 +83,6 @@ extension UITableViewCell {
 }
 
 //MARK: - UIColor extension
-
 extension UIColor {
     convenience init?(hexString: String) {
         var cString = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

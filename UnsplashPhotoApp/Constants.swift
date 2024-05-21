@@ -8,5 +8,5 @@
 import Foundation
 
 class Constants {
-    static let serverUrl = ""
+    static let serverUrl = "https://api.unsplash.com/photos/?client_id=ele1O-gBShRYQQFqvXmPTadelGhYMuVFF2Dz3019bzc"
 }

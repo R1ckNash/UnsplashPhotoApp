@@ -24,10 +24,6 @@ struct Photo: Decodable, Hashable {
     }
     
     var photoDescription: String {
-        if let description = description {
-            return description
-        } else {
-            return alt_description
-        }
+        return description ?? alt_description
     }
 }

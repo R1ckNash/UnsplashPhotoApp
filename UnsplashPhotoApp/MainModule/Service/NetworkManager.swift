@@ -11,7 +11,6 @@ protocol NetworkManagerProtocol {
     func fetchPhotos(completion: @escaping (Result<[Photo], Error>) -> Void)
 }
 
-//MARK: - Network Manager
 class NetworkManager: NetworkManagerProtocol {
     
     lazy var jsonDecoder: JSONDecoder = {
