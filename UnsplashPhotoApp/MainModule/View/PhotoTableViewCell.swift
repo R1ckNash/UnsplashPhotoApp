@@ -42,6 +42,14 @@ final class PhotoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        photoView.image = nil
+        likesLabel.text = nil
+        descriptionLabel.text = nil
+    }
+    
     func configureCell(with photo: Photo) {
         let url = URL(string: photo.urls.thumb)
         photoView.kf.setImage(with: url)
