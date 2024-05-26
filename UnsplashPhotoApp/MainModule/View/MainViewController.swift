@@ -38,7 +38,6 @@ final class MainViewController: UIViewController {
     }
     
     private func setupNavigationBarAppearance() {
-        navigationItem.title = "Main"
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .black
@@ -94,30 +93,34 @@ extension MainViewController: UITableViewDelegate {
 
 //MARK: - extension MainViewProtocol
 extension MainViewController: MainViewProtocol {
-    func success(photos: [PhotoTableViewCellModel]) {
-        updateDataSource(with: photos)
+    
+    enum MainScreenState {
+        case initial
+        case loading
+        case content(MainViewModelContent)
+        case error(String)
     }
     
-    func failure(error: String) {
-        showAlert(withTitle: "Error", message: error)
+    func configure(with model: MainScreenState) {
+        switch model {
+        case .initial:
+            break
+            
+        case .loading:
+            let loadingIndicator = UIActivityIndicatorView(style: .large)
+            loadingIndicator.center = view.center
+            loadingIndicator.color = .white
+            loadingIndicator.startAnimating()
+            view.addSubview(loadingIndicator)
+            
+        case .content(let modelContent):
+            navigationItem.title = modelContent.title
+            updateDataSource(with: modelContent.cellModels)
+            view.subviews.compactMap { $0 as? UIActivityIndicatorView }.forEach { $0.removeFromSuperview() }
+            
+        case .error(let errorMessage):
+            showAlert(withTitle: "Error", message: errorMessage)
+            view.subviews.compactMap { $0 as? UIActivityIndicatorView }.forEach { $0.removeFromSuperview() }
+        }
     }
-    
-    //    func configure(with moel: ViewModel) {
-    //        switch model {
-    //        case. loading:
-    //        case. content(let model)
-    //        case .error() ler
-    //        }
-    //    }
-    //
-    //    enum ViewModel{
-    //        case initial
-    //        case loading
-    //        case content(ViewModelContent)
-    //        case error(Error)
-    //    }
-    //    struct ViewModelContent {
-    //        let title: String
-    //        let cellModels[]
-    //    }
 }

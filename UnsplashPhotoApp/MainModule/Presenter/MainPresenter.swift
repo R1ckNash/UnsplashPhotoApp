@@ -8,8 +8,7 @@
 import Foundation
 
 protocol MainViewProtocol: AnyObject {
-    func success(photos: [PhotoTableViewCellModel])
-    func failure(error: String)
+    func configure(with model: MainViewController.MainScreenState)
 }
 
 protocol MainPresenterProtocol: AnyObject {
@@ -33,22 +32,20 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     func viewWillAppear() {
-        //view set state loading
+        view?.configure(with: .loading)
         fetchPhotos()
-        // set content
     }
     
     private func fetchPhotos() {
         photosRepository.fetch { [weak self] result in
             guard let self = self else { return }
-            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let photos):
                     self.photos = photos
-                    self.view?.success(photos: self.mapToCellModels(from: photos))
+                    self.view?.configure(with: .content(MainViewModelContent(title: "Photos", cellModels: self.mapToCellModels(from: photos))))
                 case .failure(let error):
-                    self.view?.failure(error: error.localizedDescription)
+                    self.view?.configure(with: .error(error.localizedDescription))
                 }
             }
         }
