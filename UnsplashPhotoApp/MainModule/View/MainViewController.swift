@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     var presenter: MainPresenterProtocol!
-    var dataSource: UITableViewDiffableDataSource<Int, Photo>!
+    var dataSource: UITableViewDiffableDataSource<Int, PhotoStruct>! // private
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.fetchPhotos()
+        presenter.viewWillAppear()
     }
     
     private func setupNavigationBarAppearance() {
@@ -59,7 +59,7 @@ final class MainViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, Photo>(tableView: tableView) { tableView, indexPath, photo in
+        dataSource = UITableViewDiffableDataSource<Int, PhotoStruct>(tableView: tableView) { tableView, indexPath, photo in
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath)
             as! PhotoTableViewCell
             cell.configureCell(with: photo)
@@ -67,8 +67,8 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func updateDataSource(with photos: [Photo]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Photo>()
+    private func updateDataSource(with photos: [PhotoStruct]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, PhotoStruct>()
         snapshot.appendSections([0])
         snapshot.appendItems(photos)
         dataSource?.apply(snapshot, animatingDifferences: true)
@@ -86,7 +86,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let photo = dataSource?.itemIdentifier(for: indexPath) {
-            presenter.tapOnPhoto(photo: photo)
+            presenter.didTapPhoto(photo: photo)
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -94,14 +94,33 @@ extension MainViewController: UITableViewDelegate {
 
 //MARK: - extension MainViewProtocol
 extension MainViewController: MainViewProtocol {
-    func success(photos: [Photo]) {
+    func success(photos: [PhotoStruct]) {
         updateDataSource(with: photos)
     }
     
     func failure(error: String) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.showAlert(withTitle: "Error", message: error)
-        }
+        //DispatchQueue.main.async { [weak self] in
+          //  guard let self = self else { return }
+            showAlert(withTitle: "Error", message: error)
+        //}
     }
+    
+//    func configure(with moel: ViewModel) {
+//        switch model {
+//        case. loading:
+//        case. content(let model)
+//        case .error() ler
+//        }
+//    }
+//    
+//    enum ViewModel{
+//        case initial
+//        case loading
+//        case content(ViewModelContent)
+//        case error(Error)
+//    }
+//    struct ViewModelContent {
+//        let title: String
+//        let cellModels[]
+//    }
 }

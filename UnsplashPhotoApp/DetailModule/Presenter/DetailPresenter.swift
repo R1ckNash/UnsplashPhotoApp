@@ -8,29 +8,29 @@
 import Foundation
 
 protocol DetailViewProtocol: AnyObject {
-    func configureDetailView(with photo: Photo)
+    func configureDetailView(with photo: PhotoStruct)
 }
 
 protocol DetailViewPresenterProtocol: AnyObject {
-    init(view: DetailViewProtocol, networkManager: NetworkManagerProtocol, router: RouterProtocol, photo: Photo)
     func configureDetailView()
 }
 
 final class DetailPresenter: DetailViewPresenterProtocol {
     
     weak var view: DetailViewProtocol?
-    var router: RouterProtocol?
     let networkManager: NetworkManagerProtocol!
-    var photo: Photo
+    var photo: PhotoStruct
     
-    init(view: DetailViewProtocol, networkManager: NetworkManagerProtocol, router: RouterProtocol, photo: Photo) {
+    init(view: DetailViewProtocol, networkManager: NetworkManagerProtocol, photo: PhotoStruct) {
         self.view = view
         self.networkManager = networkManager
         self.photo = photo
-        self.router = router
     }
     
     func configureDetailView() {
-        self.view?.configureDetailView(with: photo)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.view?.configureDetailView(with: self.photo)
+        }
     }
 }

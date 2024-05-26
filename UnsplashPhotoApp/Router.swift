@@ -7,32 +7,38 @@
 
 import Foundation
 import UIKit
+import Swinject
 
 protocol RouterProtocol {
-    var navigationController: UINavigationController? { get set }
-    var assemblyBuilder: AssemblyModuleBuilderProtocol? { get set }
+    func startInitialFlow(with window: UIWindow?)
     func initialViewController()
-    func showDetailViewController(with photo: Photo)
+    func showDetailViewController(with photo: PhotoStruct)
 }
 
-class Router: RouterProtocol {
-    var navigationController: UINavigationController?
-    var assemblyBuilder: AssemblyModuleBuilderProtocol?
+final class Router: RouterProtocol {
+    var navigationController: UINavigationController
     
-    init(navigationController: UINavigationController? = nil, assemblyBuilder: AssemblyModuleBuilderProtocol? = nil) {
-        self.navigationController = navigationController
-        self.assemblyBuilder = assemblyBuilder
+    private var container: MainContainer {
+        MainContainer.shared
+    }
+    
+    init() {
+        self.navigationController = UINavigationController()
+    }
+    
+    func startInitialFlow(with window: UIWindow?) {
+        initialViewController()
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
     
     func initialViewController() {
-        guard let navigationController = navigationController else { return }
-        guard let mainViewController = assemblyBuilder?.buildMainModule(router: self) else { return }
+        let mainViewController = container.mainAssembler.assemble()
         navigationController.viewControllers = [mainViewController]
     }
     
-    func showDetailViewController(with photo: Photo) {
-        guard let navigationController = navigationController else { return }
-        guard let detailViewController = assemblyBuilder?.buildDetailModule(with: photo, router: self) else { return }
+    func showDetailViewController(with photo: PhotoStruct) {
+        let detailViewController = container.detailAssembler.assemble(with: photo)
         navigationController.pushViewController(detailViewController, animated: true)
     }
 }

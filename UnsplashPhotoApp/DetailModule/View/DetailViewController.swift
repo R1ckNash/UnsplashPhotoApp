@@ -41,7 +41,7 @@ final class DetailViewController: UIViewController {
 
 //MARK: - extension DetailViewProtocol
 extension DetailViewController: DetailViewProtocol {
-    func configureDetailView(with photo: Photo) {
+    func configureDetailView(with photo: PhotoStruct) {
         navigationItem.title = photo.user.username
         
         let url = URL(string: photo.urls.regular)

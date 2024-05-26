@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photo: Decodable, Hashable {
+struct PhotoStruct: Decodable, Hashable {
     let color: String
     let description: String?
     let alt_description: String

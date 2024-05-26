@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 
+
 final class PhotoTableViewCell: UITableViewCell {
     
     private lazy var photoView: UIImageView = {
@@ -36,6 +37,8 @@ final class PhotoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        // configure apperence
+        //backgroundColor = .black
     }
     
     required init?(coder: NSCoder) {
@@ -45,12 +48,13 @@ final class PhotoTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        photoView.kf.cancelDownloadTask()
         photoView.image = nil
         likesLabel.text = nil
         descriptionLabel.text = nil
     }
     
-    func configureCell(with photo: Photo) {
+    func configureCell(with photo: PhotoStruct) {
         let url = URL(string: photo.urls.thumb)
         photoView.kf.setImage(with: url)
         
@@ -91,7 +95,7 @@ extension UITableViewCell {
 }
 
 //MARK: - UIColor extension
-extension UIColor {
+private extension UIColor {
     convenience init?(hexString: String) {
         var cString = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
