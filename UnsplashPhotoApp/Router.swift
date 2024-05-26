@@ -12,7 +12,7 @@ import Swinject
 protocol RouterProtocol {
     func startInitialFlow(with window: UIWindow?)
     func initialViewController()
-    func showDetailViewController(with photo: PhotoStruct)
+    func showDetailViewController(with detailModel: DetailViewModel)
 }
 
 final class Router: RouterProtocol {
@@ -37,8 +37,8 @@ final class Router: RouterProtocol {
         navigationController.viewControllers = [mainViewController]
     }
     
-    func showDetailViewController(with photo: PhotoStruct) {
-        let detailViewController = container.detailAssembler.assemble(with: photo)
+    func showDetailViewController(with detailModel: DetailViewModel) {
+        let detailViewController = container.detailAssembler.assemble(with: detailModel)
         navigationController.pushViewController(detailViewController, animated: true)
     }
 }

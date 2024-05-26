@@ -8,6 +8,7 @@
 import Foundation
 
 struct PhotoStruct: Decodable, Hashable {
+    let id: String
     let color: String
     let description: String?
     let alt_description: String

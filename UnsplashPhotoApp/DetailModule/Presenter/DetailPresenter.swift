@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailViewProtocol: AnyObject {
-    func configureDetailView(with photo: PhotoStruct)
+    func configureDetailView(with detailModel: DetailViewModel)
 }
 
 protocol DetailViewPresenterProtocol: AnyObject {
@@ -18,19 +18,17 @@ protocol DetailViewPresenterProtocol: AnyObject {
 final class DetailPresenter: DetailViewPresenterProtocol {
     
     weak var view: DetailViewProtocol?
-    let networkManager: NetworkManagerProtocol!
-    var photo: PhotoStruct
+    var detailModel: DetailViewModel
     
-    init(view: DetailViewProtocol, networkManager: NetworkManagerProtocol, photo: PhotoStruct) {
+    init(view: DetailViewProtocol, detailModel: DetailViewModel) {
         self.view = view
-        self.networkManager = networkManager
-        self.photo = photo
+        self.detailModel = detailModel
     }
     
     func configureDetailView() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.view?.configureDetailView(with: self.photo)
+            self.view?.configureDetailView(with: self.detailModel)
         }
     }
 }

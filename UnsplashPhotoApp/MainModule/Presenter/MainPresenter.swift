@@ -8,14 +8,14 @@
 import Foundation
 
 protocol MainViewProtocol: AnyObject {
-    func success(photos: [PhotoStruct])
+    func success(photos: [PhotoTableViewCellModel])
     func failure(error: String)
 }
 
 protocol MainPresenterProtocol: AnyObject {
     var photos: [PhotoStruct]? { get set }
     func viewWillAppear()
-    func didTapPhoto(photo: PhotoStruct?)
+    func didTapPhoto(id: String)
 }
 
 final class MainPresenter: MainPresenterProtocol {
@@ -46,7 +46,7 @@ final class MainPresenter: MainPresenterProtocol {
                 switch result {
                 case .success(let photos):
                     self.photos = photos
-                    self.view?.success(photos: photos)
+                    self.view?.success(photos: self.mapToCellModels(from: photos))
                 case .failure(let error):
                     self.view?.failure(error: error.localizedDescription)
                 }
@@ -54,13 +54,22 @@ final class MainPresenter: MainPresenterProtocol {
         }
     }
     
-    func didTapPhoto(photo: PhotoStruct?) { // сюда придет не фото сюда бы передать id и вытащить ее из массива // общаться индексами или айдишниками
-        guard let photo = photo else { return }
-        //найти по айдишнику фото в репозитории
-        router.showDetailViewController(with: photo)
+    func didTapPhoto(id: String) {
+        guard let photo = (photos?.first { $0.id == id }) else { return }
+        router.showDetailViewController(with: mapToDetailViewModel(from: photo))
+    }
+    
+    //MARK: - Mappers
+    
+    private func mapToDetailViewModel(from photo: PhotoStruct) -> DetailViewModel {
+        return DetailViewModel(photoUrl: photo.urls.regular, authorName: photo.user.username)
+    }
+    
+    private func mapToCellModel(from photo: PhotoStruct) -> PhotoTableViewCellModel {
+        return PhotoTableViewCellModel(id: photo.id, photoUrl: photo.urls.thumb, likes: photo.likes, description: photo.photoDescription, color: photo.color)
+    }
+    
+    private func mapToCellModels(from photos: [PhotoStruct]) -> [PhotoTableViewCellModel] {
+        return photos.map { mapToCellModel(from: $0) }
     }
 }
-
-// PhotoTableViewCell Model     вью модель
-// из серверной модели в доменную мапит репозиторий(нетворк менеджер в моем случае), презентер перегоняет из доменной во вью модель
-//

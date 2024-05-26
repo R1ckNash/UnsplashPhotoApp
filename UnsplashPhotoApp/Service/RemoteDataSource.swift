@@ -16,6 +16,7 @@ struct Request {
 
 protocol RemoteDataSourceProtocol {
     func fetchPhotos(completion: @escaping (Result<[PhotoStruct], NetworkError>) -> Void)
+    func fetchPhotosWithCancellation(completion: @escaping (Result<[PhotoStruct], NetworkError>) -> Void) -> RunningRequest
 }
 
 final class RemoteDataSource: RemoteDataSourceProtocol {
@@ -33,4 +34,14 @@ final class RemoteDataSource: RemoteDataSourceProtocol {
         }
     }
     
+    func fetchPhotosWithCancellation(completion: @escaping (Result<[PhotoStruct], NetworkError>) -> Void) -> RunningRequest {
+        let request = Request(method: "GET", path: "/photos", parameters: ["client_id": "ele1O-gBShRYQQFqvXmPTadelGhYMuVFF2Dz3019bzc"], needAuth: false)
+        
+        let runningRequest = networkManager.makeCancellableRequest(request: request) { 
+            (result: Result<[PhotoStruct], NetworkError>) in
+            completion(result)
+        }
+        
+        return runningRequest
+    }
 }

@@ -8,7 +8,6 @@
 import UIKit
 import Kingfisher
 
-
 final class PhotoTableViewCell: UITableViewCell {
     
     private lazy var photoView: UIImageView = {
@@ -36,13 +35,17 @@ final class PhotoTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupLayout()
-        // configure apperence
-        //backgroundColor = .black
+        configureAppearance()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureAppearance() {
+        backgroundColor = .black
     }
     
     override func prepareForReuse() {
@@ -54,14 +57,13 @@ final class PhotoTableViewCell: UITableViewCell {
         descriptionLabel.text = nil
     }
     
-    func configureCell(with photo: PhotoStruct) {
-        let url = URL(string: photo.urls.thumb)
+    func configureCell(with model: PhotoTableViewCellModel) {
+        let url = URL(string: model.photoUrl)
         photoView.kf.setImage(with: url)
         
-        likesLabel.text = "\(photo.likes) likes"
-        descriptionLabel.text = photo.photoDescription
-        descriptionLabel.textColor = UIColor(hexString: photo.color)
-        backgroundColor = .black
+        likesLabel.text = "\(model.likes) likes"
+        descriptionLabel.text = model.description
+        descriptionLabel.textColor = UIColor(hexString: model.color)
     }
     
     private func setupLayout() {

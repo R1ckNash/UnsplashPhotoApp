@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol DetailModuleAssemblerProtocol {
-    func assemble(with photo: PhotoStruct) -> UIViewController
+    func assemble(with detailModel: DetailViewModel) -> UIViewController
 }
 
 final class DetailModuleAssembler: DetailModuleAssemblerProtocol {
@@ -19,9 +19,9 @@ final class DetailModuleAssembler: DetailModuleAssemblerProtocol {
         MainContainer.shared
     }
     
-    func assemble(with photo: PhotoStruct) -> UIViewController {
+    func assemble(with detailModel: DetailViewModel) -> UIViewController {
         let view = DetailViewController()
-        let presenter = DetailPresenter(view: view, networkManager: container.networkManager, photo: photo)
+        let presenter = DetailPresenter(view: view, detailModel: detailModel)
         view.presenter = presenter
         return view
     }

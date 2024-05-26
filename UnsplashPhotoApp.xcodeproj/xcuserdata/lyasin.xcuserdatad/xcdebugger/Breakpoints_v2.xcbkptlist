@@ -62,9 +62,9 @@
             filePath = "UnsplashPhotoApp/MainModule/Presenter/MainPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "didTapPhoto(photo:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "didTapPhoto(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

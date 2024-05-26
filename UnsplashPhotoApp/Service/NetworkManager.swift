@@ -7,9 +7,16 @@
 
 import Foundation
 
-protocol NetworkManagerProtocol {
-    func fetchPhotos(completion: @escaping (Result<[PhotoStruct], NetworkError>) -> Void)
+struct RunningRequest {
+    var cancelMethod: () -> Void
     
+    func cancel() {
+        cancelMethod()
+    }
+}
+
+protocol NetworkManagerProtocol {
+    func makeCancellableRequest<T: Decodable>(request: Request, completion: @escaping (Result<T, NetworkError>) -> Void) -> RunningRequest
     func makeRequest<T: Decodable>(request: Request, completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
@@ -21,11 +28,11 @@ final class NetworkManager: NetworkManagerProtocol {
         self.jsonDecoder = jsonDecoder
     }
     
-    func makeRequest<T: Decodable>(request: Request, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func makeCancellableRequest<T: Decodable>(request: Request, completion: @escaping (Result<T, NetworkError>) -> Void) -> RunningRequest {
         
         guard var urlComponents = URLComponents(string: Constants.host) else {
             completion(.failure(.custom("Invalid URL components")))
-            return
+            return RunningRequest(cancelMethod: {})
         }
         
         urlComponents.path = request.path
@@ -35,14 +42,14 @@ final class NetworkManager: NetworkManagerProtocol {
         
         guard let url = urlComponents.url else {
             completion(.failure(.invalidURL))
-            return
+            return RunningRequest(cancelMethod: {})
         }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method
         
         if request.needAuth {
-             urlRequest.addValue("Bearer <token>", forHTTPHeaderField: "Authorization")
+            urlRequest.addValue("Bearer <token>", forHTTPHeaderField: "Authorization")
         }
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -63,37 +70,14 @@ final class NetworkManager: NetworkManagerProtocol {
                 completion(.failure(.decodingFailed(decodingError)))
             }
         }
+        
         task.resume()
         
+        return RunningRequest(cancelMethod: { task.cancel() })
     }
     
-    func fetchPhotos(completion: @escaping (Result<[PhotoStruct], NetworkError>) -> Void) {
-        guard let url = URL(string: Constants.host) else {
-            completion(.failure(NetworkError.custom("Invalid URL")))
-            return
-        }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                completion(.failure(NetworkError.custom(error.localizedDescription)))
-            } else {
-                guard let data = data else {
-                    completion(.failure(NetworkError.custom("No data received")))
-                    return
-                }
-                
-                do {
-                    let photos = try self.jsonDecoder.decode([PhotoStruct].self, from: data)
-                    completion(.success(photos))
-                } catch {
-                    completion(.failure(NetworkError.invalidURL))
-                }
-            }
-            
-        }
-        task.resume()
+    func makeRequest<T: Decodable>(request: Request, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        _ = makeCancellableRequest(request: request, completion: completion)
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     var presenter: MainPresenterProtocol!
-    var dataSource: UITableViewDiffableDataSource<Int, PhotoStruct>! // private
+    private var dataSource: UITableViewDiffableDataSource<Int, PhotoTableViewCellModel>!
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -59,16 +59,16 @@ final class MainViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, PhotoStruct>(tableView: tableView) { tableView, indexPath, photo in
+        dataSource = UITableViewDiffableDataSource<Int, PhotoTableViewCellModel>(tableView: tableView) { tableView, indexPath, cellModel in
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath)
             as! PhotoTableViewCell
-            cell.configureCell(with: photo)
+            cell.configureCell(with: cellModel)
             return cell
         }
     }
     
-    private func updateDataSource(with photos: [PhotoStruct]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, PhotoStruct>()
+    private func updateDataSource(with photos: [PhotoTableViewCellModel]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, PhotoTableViewCellModel>()
         snapshot.appendSections([0])
         snapshot.appendItems(photos)
         dataSource?.apply(snapshot, animatingDifferences: true)
@@ -86,7 +86,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let photo = dataSource?.itemIdentifier(for: indexPath) {
-            presenter.didTapPhoto(photo: photo)
+            presenter.didTapPhoto(id: photo.id)
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -94,33 +94,30 @@ extension MainViewController: UITableViewDelegate {
 
 //MARK: - extension MainViewProtocol
 extension MainViewController: MainViewProtocol {
-    func success(photos: [PhotoStruct]) {
+    func success(photos: [PhotoTableViewCellModel]) {
         updateDataSource(with: photos)
     }
     
     func failure(error: String) {
-        //DispatchQueue.main.async { [weak self] in
-          //  guard let self = self else { return }
-            showAlert(withTitle: "Error", message: error)
-        //}
+        showAlert(withTitle: "Error", message: error)
     }
     
-//    func configure(with moel: ViewModel) {
-//        switch model {
-//        case. loading:
-//        case. content(let model)
-//        case .error() ler
-//        }
-//    }
-//    
-//    enum ViewModel{
-//        case initial
-//        case loading
-//        case content(ViewModelContent)
-//        case error(Error)
-//    }
-//    struct ViewModelContent {
-//        let title: String
-//        let cellModels[]
-//    }
+    //    func configure(with moel: ViewModel) {
+    //        switch model {
+    //        case. loading:
+    //        case. content(let model)
+    //        case .error() ler
+    //        }
+    //    }
+    //
+    //    enum ViewModel{
+    //        case initial
+    //        case loading
+    //        case content(ViewModelContent)
+    //        case error(Error)
+    //    }
+    //    struct ViewModelContent {
+    //        let title: String
+    //        let cellModels[]
+    //    }
 }

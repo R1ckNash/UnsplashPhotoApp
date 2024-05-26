@@ -7,7 +7,8 @@
 
 import Foundation
 
-class PhotoDTO: NSObject, Decodable {
+final class PhotoDTO: NSObject, Decodable {
+    let id: String
     let color: String
     let desc: String?
     let altDescription: String
@@ -15,7 +16,8 @@ class PhotoDTO: NSObject, Decodable {
     let urls: ImageUrls
     let user: User
     
-    init(color: String, desc: String?, altDescription: String, likes: Int, urls: ImageUrls, user: User) {
+    init(id: String, color: String, desc: String?, altDescription: String, likes: Int, urls: ImageUrls, user: User) {
+        self.id = id
         self.color = color
         self.desc = desc
         self.altDescription = altDescription
@@ -28,7 +30,7 @@ class PhotoDTO: NSObject, Decodable {
         return desc ?? altDescription
     }
     
-    class ImageUrls: NSObject, Decodable {
+    final class ImageUrls: NSObject, Decodable {
         let thumb: String
         let regular: String
         
@@ -38,7 +40,7 @@ class PhotoDTO: NSObject, Decodable {
         }
     }
     
-    class User: NSObject, Decodable {
+    final class User: NSObject, Decodable {
         let username: String
         
         init(username: String) {
