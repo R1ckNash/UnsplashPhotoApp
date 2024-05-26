@@ -10,18 +10,20 @@ import UIKit
 final class MainViewController: UIViewController {
     
     var presenter: MainPresenterProtocol!
-    private var dataSource: UITableViewDiffableDataSource<Int, PhotoTableViewCellModel>!
+    private var dataSource: UICollectionViewDiffableDataSource<Int, PhotoTableViewCellModel>!
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.rowHeight = UITableView.automaticDimension
-        table.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        table.separatorStyle = .none
-        table.backgroundColor = .black
-        table.delegate = self
-        table.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.reuseIdentifier)
-        return table
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .black
+        collectionView.delegate = self
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
+        return collectionView
     }()
     
     override func viewDidLoad() {
@@ -47,20 +49,19 @@ final class MainViewController: UIViewController {
     }
     
     private func setupLayouts() {
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, PhotoTableViewCellModel>(tableView: tableView) { tableView, indexPath, cellModel in
-            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath)
-            as! PhotoTableViewCell
+        dataSource = UICollectionViewDiffableDataSource<Int, PhotoTableViewCellModel>(collectionView: collectionView) { collectionView, indexPath, cellModel in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
             cell.configureCell(with: cellModel)
             return cell
         }
@@ -81,17 +82,21 @@ final class MainViewController: UIViewController {
     }
 }
 
-//MARK: - extension UITableViewDelegate
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//MARK: - extension UICollectionViewDelegate
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let photo = dataSource?.itemIdentifier(for: indexPath) {
             presenter.didTapPhoto(id: photo.id)
-            tableView.deselectRow(at: indexPath, animated: true)
+            collectionView.deselectItem(at: indexPath, animated: true)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 300)
     }
 }
 
-//MARK: - extension MainViewProtocol
+//MARK: - MainViewProtocol conformance
 extension MainViewController: MainViewProtocol {
     
     enum MainScreenState {
