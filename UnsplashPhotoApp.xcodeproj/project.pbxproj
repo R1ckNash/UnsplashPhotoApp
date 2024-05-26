@@ -15,10 +15,7 @@
 		9B12DF912C02A2330002B6B0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12DF902C02A2330002B6B0 /* Storage.swift */; };
 		9B12DF932C02A6C70002B6B0 /* PhotoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12DF922C02A6C70002B6B0 /* PhotoDTO.swift */; };
 		9B1DB2AA2C02AE060003C22E /* PhotoTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DB2A92C02AE060003C22E /* PhotoTableViewCellModel.swift */; };
-		9B1DB2B62C02B2960003C22E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 9B1DB2B52C02B2960003C22E /* Swinject */; };
 		9B5662662C0346FE0068C273 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5662652C0346FE0068C273 /* DetailViewModel.swift */; };
-		9B5662692C03560E0068C273 /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9B5662682C03560E0068C273 /* Swinject-Dynamic */; };
-		9B56626A2C03560E0068C273 /* Swinject-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9B5662682C03560E0068C273 /* Swinject-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9B87FE282BFCE85B008E6290 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9B87FE272BFCE85B008E6290 /* Kingfisher */; };
 		9B87FE2A2BFD0947008E6290 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87FE292BFD0947008E6290 /* DetailViewController.swift */; };
 		9B87FE2C2BFD0B8B008E6290 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87FE2B2BFD0B8B008E6290 /* DetailPresenter.swift */; };
@@ -33,6 +30,7 @@
 		9BA4D70F2BF7FA77009BB92D /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D70E2BF7FA77009BB92D /* MainPresenter.swift */; };
 		9BA4D7112BF7FC9F009BB92D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7102BF7FC9F009BB92D /* NetworkManager.swift */; };
 		9BA4D7132BF8001A009BB92D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4D7122BF8001A009BB92D /* Constants.swift */; };
+		9BAA02EE2C03CA250078CB43 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 9BAA02ED2C03CA250078CB43 /* Swinject */; };
 		9BE295CF2C0385390065CA36 /* MainViewModelContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE295CE2C0385390065CA36 /* MainViewModelContent.swift */; };
 		9BE295D12C038D7C0065CA36 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE295D02C038D7C0065CA36 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -57,11 +55,10 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		9B1DB2AF2C02B0230003C22E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9B56626A2C03560E0068C273 /* Swinject-Dynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,9 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B5662692C03560E0068C273 /* Swinject-Dynamic in Frameworks */,
 				9B87FE282BFCE85B008E6290 /* Kingfisher in Frameworks */,
-				9B1DB2B62C02B2960003C22E /* Swinject in Frameworks */,
+				9BAA02EE2C03CA250078CB43 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,8 +272,7 @@
 			name = UnsplashPhotoApp;
 			packageProductDependencies = (
 				9B87FE272BFCE85B008E6290 /* Kingfisher */,
-				9B1DB2B52C02B2960003C22E /* Swinject */,
-				9B5662682C03560E0068C273 /* Swinject-Dynamic */,
+				9BAA02ED2C03CA250078CB43 /* Swinject */,
 			);
 			productName = UnsplashPhotoApp;
 			productReference = 9BA4D6CB2BF7E00E009BB92D /* UnsplashPhotoApp.app */;
@@ -353,7 +348,7 @@
 			mainGroup = 9BA4D6C22BF7E00E009BB92D;
 			packageReferences = (
 				9B87FE262BFCE85B008E6290 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				9B12DF812C0238050002B6B0 /* XCRemoteSwiftPackageReference "Swinject" */,
+				9BAA02EC2C03CA250078CB43 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 9BA4D6CC2BF7E00E009BB92D /* Products */;
 			projectDirPath = "";
@@ -519,7 +514,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -601,6 +596,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.illi.UnsplashPhotoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -754,14 +750,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9B12DF812C0238050002B6B0 /* XCRemoteSwiftPackageReference "Swinject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swinject/Swinject.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.8;
-			};
-		};
 		9B87FE262BFCE85B008E6290 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -770,23 +758,26 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		9BAA02EC2C03CA250078CB43 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9B1DB2B52C02B2960003C22E /* Swinject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B12DF812C0238050002B6B0 /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
-		};
-		9B5662682C03560E0068C273 /* Swinject-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B12DF812C0238050002B6B0 /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = "Swinject-Dynamic";
-		};
 		9B87FE272BFCE85B008E6290 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9B87FE262BFCE85B008E6290 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9BAA02ED2C03CA250078CB43 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BAA02EC2C03CA250078CB43 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
